@@ -1,0 +1,15 @@
+!!! 5
+%html
+  %head
+    %title
+      =@title
+      \- Sinatra Eve
+    %link{ :href => "/stylesheets/reset.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }/
+    %link{ :href => "/app.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }/
+    %script{ :src => "/javascripts/jquery-1.7.1.min.js", :type => "text/javascript"}
+  %body
+    -if @character
+      %div.character-info
+        =haml :'character/_header.html'
+    %div.body
+      =yield

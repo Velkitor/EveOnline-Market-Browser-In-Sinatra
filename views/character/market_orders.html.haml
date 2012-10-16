@@ -1,0 +1,51 @@
+%h3 Sell Orders ( #{@open_sell_orders.length} )
+%table{ :border=>"1", :cellpadding=>"10", :cellspacing => "10" }
+  %tr
+    %th
+      &nbsp
+    %th
+      Order Id
+    %th
+      Station ID
+    %th
+      Price
+    %th
+      Volume
+    %th
+      Min Volume
+    %th
+      Range
+    %th
+      Issued
+    %th
+      Pending ISK
+  -total = 0.0
+  -@open_sell_orders.each do |k,v|
+    %tr
+      %td
+        %img{ :src => "http://image.eveonline.com/InventoryType/#{v.type_id}_32.png" }
+        -inv = InvTypes.where(:typeID => v.type_id)
+        -if inv.count > 0
+          =inv.first.typeName
+      %td
+        =v.order_id
+      %td
+        =v.station_id
+      %td
+        =v.price.comify
+      %td
+        ="#{v.vol_remaining.comify} of #{v.vol_entered.comify}"
+      %td
+        =v.min_volume
+      %td
+        =v.range
+      %td
+        =v.issued
+      %td.centered
+        -value = (v.price * v.vol_remaining).round(2)
+        =value.comify
+        -total = total + value
+  %tr
+    %td{ :colspan => 7 }
+    %td Total Pending ISK:
+    %td=total.round(2).comify

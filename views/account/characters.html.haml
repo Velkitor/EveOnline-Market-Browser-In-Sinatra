@@ -1,0 +1,22 @@
+%table
+  %tr
+    %th
+      &nbsp;
+    %th
+      Name
+    %th
+      Corp
+    %th
+      Character ID
+  -@characters.each do |k,v|
+    -if v.kind_of?EveCharacter
+      %tr
+        %td
+          %img{ :src => "http://image.eveonline.com/Character/#{v.id}_32.jpg"}
+        %td
+          %a{ :href => "/character/#{v.id.to_s}"}=v.name
+        %td
+          %img{ :src => "http://image.eveonline.com/Corporation/#{v.corporation_id}_32.png"}
+          =v.corporation_name
+        %td
+          =v.id

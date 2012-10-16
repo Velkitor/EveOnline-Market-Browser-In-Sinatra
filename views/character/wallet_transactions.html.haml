@@ -1,0 +1,100 @@
+%h3 Sold Items ( #{@sell_transactions.length} )
+%table.sold{ :border=>"1", :cellpadding=>"10", :cellspacing => "10" }
+  %thead
+    %tr
+      %th
+        &nbsp
+      %th
+        Transaction Id
+      %th
+        For
+      %th
+        Station
+      %th
+        Price
+      %th
+        Volume
+      %th
+        Client Name
+      %th
+        Transaction Time
+      %th
+        $$$
+  %tbody
+    -@sell_transactions.each.inject(0) do |i, v|
+      %tr{ :class => ( i > 24) ? "collapsed" : ""}
+        %td
+          %img{ :src => "http://image.eveonline.com/InventoryType/#{v.type_id}_32.png" }
+          =v.type_name
+        %td
+          =v.transaction_id
+        %td
+          =v.transaction_for
+        %td
+          =v.station_name
+          ( #{v.station_id} )
+        %td
+          =v.price.comify
+        %td
+          =v.quantity.comify
+        %td
+          =v.client_name
+        %td
+          =v.transaction_date_time
+        %td.centered
+          %span{ :style => "color:green;" }=(v.price * v.quantity).round(2).comify
+      -i + 1
+  %tfoot
+    %tr
+      %td.centered{ :colspan => 9}
+        %a{ :href => "#", :onclick => "$('table.sold tr.collapsed').toggle(); return false"} expand/collapse
+
+%h3 Purchased Items ( #{@sell_transactions.length} )
+%table.purchased{ :border=>"1", :cellpadding=>"10", :cellspacing => "10" }
+  %tr
+    %th
+      &nbsp
+    %th
+      Transaction Id
+    %th
+      For
+    %th
+      Station
+    %th
+      Price
+    %th
+      Volume
+    %th
+      Client Name
+    %th
+      Transaction Time
+    %th
+      $$$
+    
+  -@buy_transactions.each.inject(0) do |i, v|
+    %tr{ :class => ( i > 24) ? "collapsed" : ""}
+      %td
+        %img{ :src => "http://image.eveonline.com/InventoryType/#{v.type_id}_32.png" }
+        =v.type_name
+      %td
+        =v.transaction_id
+      %td
+        =v.transaction_for
+      %td
+        =v.station_name
+        ( #{v.station_id} )
+      %td
+        =v.price.comify
+      %td
+        =v.quantity.comify
+      %td
+        =v.client_name
+      %td
+        =v.transaction_date_time
+      %td.centered
+        %span{ :style => "color:green;" }=(v.price * v.quantity).round(2).comify
+    -i + 1
+  %tfoot
+    %tr
+      %td.centered{ :colspan => 9}
+        %a{ :href => "#", :onclick => "$('table.purchased tr.collapsed').toggle(); return false"} expand/collapse

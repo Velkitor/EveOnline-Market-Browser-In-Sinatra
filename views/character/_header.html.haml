@@ -1,0 +1,17 @@
+%a{ :href => "/character/#{@character.id}"}
+  %img.avatar{ :src => "http://image.eveonline.com/Character/#{@character.id}_64.jpg"}
+%div.info
+  %p.name
+    %a{ :href => "/character/#{@character.id}"}=@character.name
+  %p.account-balance
+    %a{ :href => "/character/#{@character.id}/wallet_transactions"}
+      =@character.account_balance.comify
+      isk
+  %p.training
+    -training = @character.skill_in_training
+    - if training && training.trainingEndTime
+      Completes In:
+      -duration = TimeSpan.new( training.trainingEndTime - Time.now)
+      =duration.strfts
+      on
+      =duration.from_now

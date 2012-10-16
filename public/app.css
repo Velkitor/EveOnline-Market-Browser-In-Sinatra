@@ -1,0 +1,87 @@
+strong{
+  font-weight:bold;
+}
+body{
+  background:#999;
+}
+
+div.character-info{
+  background:#777;
+  min-height:64px;
+}
+
+h1{
+  font-size:120%;
+  font-weight:bold;
+  margin-top:8px;
+  margin-bottom:8px;
+}
+h3{
+  font-size:110%;
+  font-weight:bold;
+  padding:0;
+  width:100%;
+  margin:8px auto;
+  text-align:center;
+}
+/*
+======================================================
+
+                         SHARED
+
+======================================================
+*/
+span.money,
+span.money-positive{
+  color:#050 !important;
+}
+span.money-negative{
+  color:#F00 !important;
+}
+/*
+======================================================
+
+            Character Info Header
+
+======================================================
+*/
+div.character-info img.avatar{
+  float:left;
+}
+
+div.character-info div.info{
+  margin-left:68px;
+}
+
+div.character-info div.info p.name{
+  font-size:110%;
+  font-weight:bold;
+  margin-bottom:4px;
+}
+div.character-info div.info p.account-balance a{
+  color:#0A0;
+  text-decoration:none;
+}
+
+/*
+======================================================
+
+            Market Info Page
+
+======================================================
+*/
+div.body table{
+  border:1px solid #f00;
+  margin:0 auto;
+}
+div.body table td{
+  border:1px solid #f00;
+  padding:0 10px;
+}
+div.body table td.centered{
+  text-align:center;
+}
+
+div.body table tr.collapsed{
+  display:none;
+}

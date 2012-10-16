@@ -1,0 +1,41 @@
+%h3 Wallet movement over the last month
+%ul
+  %li
+    %p
+      %strong Earned:
+      %span.money=@earned.comify
+  %li
+    %p
+      %strong Spent:
+      %span.money-negative=@spent.comify
+  %li
+    %p
+      %strong Delta:
+      %span{ :class => ( @delta < 0 ) ? "money-negative" : "money-positive" }=@delta.comify
+
+%h3 Past Week
+-7.times do |i|
+  %div{ :style => "width:200px;float:left;"}
+    %p
+      %strong
+        =(i+1).days.ago.dayname
+    -since = Time.now.utc - (i+1).days
+    -til = Time.now.utc - (i).days
+    -spent = @buy_transactions.select{ |transaction| Time.parse(transaction.transaction_date_time) > since && Time.parse(transaction.transaction_date_time) <= til }.each.inject(0.0) do |total, transaction|
+      -total = total + (transaction.price * transaction.quantity)
+    -earned = @sell_transactions.select{ |transaction| Time.parse(transaction.transaction_date_time) > since && Time.parse(transaction.transaction_date_time) <= til }.each.inject(0.0) do |total, transaction|
+      -total = total + (transaction.price * transaction.quantity)
+    -delta = (earned - spent).round(2)
+    %ul
+      %li
+        %p
+          %strong Earned:
+          %span.money=earned.comify
+      %li
+        %p
+          %strong Spent:
+          %span.money-negative=spent.comify
+      %li
+        %p
+          %strong Delta:
+          %span{ :class => ( delta < 0 ) ? "money-negative" : "money-positive" }=delta.comify
